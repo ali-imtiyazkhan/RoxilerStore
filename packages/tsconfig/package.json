@@ -1,0 +1,15 @@
+{
+  "name": "@roxiler/tsconfig",
+  "version": "1.0.0",
+  "private": true,
+  "files": [
+    "base.json",
+    "backend.json",
+    "frontend.json"
+  ],
+  "exports": {
+    "./base.json": "./base.json",
+    "./backend.json": "./backend.json",
+    "./frontend.json": "./frontend.json"
+  }
+}
