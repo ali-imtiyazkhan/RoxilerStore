@@ -6,14 +6,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "bun --watch run src/index.ts",
-    "build": "prisma generate --schema=prisma/schema.prisma && tsc",
+    "build": "bunx prisma@5.22.0 generate --schema=prisma/schema.prisma && tsc",
     "start": "node dist/index.js",
     "lint": "bunx eslint src --ext .ts",
-    "db:generate": "prisma generate --schema=prisma/schema.prisma",
-    "db:push": "prisma db push --schema=prisma/schema.prisma",
-    "db:migrate": "prisma migrate dev --schema=prisma/schema.prisma",
-    "db:migrate:deploy": "prisma migrate deploy --schema=prisma/schema.prisma",
-    "db:studio": "prisma studio --schema=prisma/schema.prisma",
+    "db:generate": "bunx prisma@5.22.0 generate --schema=prisma/schema.prisma",
+    "db:push": "bunx prisma@5.22.0 db push --schema=prisma/schema.prisma",
+    "db:migrate": "bunx prisma@5.22.0 migrate dev --schema=prisma/schema.prisma",
+    "db:migrate:deploy": "bunx prisma@5.22.0 migrate deploy --schema=prisma/schema.prisma",
+    "db:studio": "bunx prisma@5.22.0 studio --schema=prisma/schema.prisma",
     "db:seed": "bun run prisma/seed.ts"
   },
   "dependencies": {
