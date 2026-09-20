@@ -1,6 +1,7 @@
 services:
   - type: web
     name: roxiler-backend
+    runtime: node
     rootDir: apps/backend
     buildCommand: bun install && tsc && bunx prisma generate --schema=prisma/schema.prisma
     startCommand: node dist/index.js
