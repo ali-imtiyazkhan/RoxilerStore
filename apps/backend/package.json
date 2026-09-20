@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "bun --watch run src/index.ts",
-    "build": "tsc && prisma generate",
+    "build": "tsc -p tsconfig.json && prisma generate",
     "start": "node dist/index.js",
     "lint": "bunx eslint src --ext .ts",
     "db:generate": "prisma generate",
