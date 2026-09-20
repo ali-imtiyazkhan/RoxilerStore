@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
@@ -37,7 +37,7 @@ const querySchema = z.object({
   role: z.enum(['SYSTEM_ADMIN', 'NORMAL_USER', 'STORE_OWNER']).optional()
 });
 
-router.get('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const query = querySchema.parse(req.query);
   const { page, limit, sortBy, sortOrder, name, email, address, role } = query;
 
@@ -63,7 +63,7 @@ router.get('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReques
         address: true,
         role: true,
         createdAt: true,
-        store: { select: { id: true, name: true, rating: true } }
+store: { select: { id: true, name: true, ratings: { select: { value: true } } } }
       }
     }),
     prisma.user.count({ where })
@@ -75,7 +75,7 @@ router.get('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReques
   });
 }));
 
-router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const data = createUserSchema.parse(req.body);
 
   const existing = await prisma.user.findUnique({ where: { email: data.email } });
@@ -90,7 +90,7 @@ router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReque
   res.status(201).json({ user });
 }));
 
-router.get('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const user = await prisma.user.findUnique({
     where: { id: req.params.id },
     select: {
@@ -100,14 +100,14 @@ router.get('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReq
       address: true,
       role: true,
       createdAt: true,
-      store: { select: { id: true, name: true, rating: true } }
+      store: { select: { id: true, name: true, ratings: { select: { value: true } } } }
     }
   });
   if (!user) throw new AppError(404, 'User not found');
   res.json({ user });
 }));
 
-router.put('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.put('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const data = updateUserSchema.parse(req.body);
 
   if (data.email) {
@@ -125,7 +125,7 @@ router.put('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReq
   res.json({ user });
 }));
 
-router.delete('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.delete('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   await prisma.user.delete({ where: { id: req.params.id } });
   res.json({ message: 'User deleted' });
 }));

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AuthRequest, requireRole } from '../middleware/auth.js';
@@ -10,7 +10,7 @@ const ratingSchema = z.object({
   value: z.number().int().min(1).max(5)
 });
 
-router.post('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res) => {
+router.post('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const { value } = ratingSchema.parse(req.body);
   const { storeId } = req.params;
 
@@ -38,7 +38,7 @@ router.post('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async (
   res.json({ rating, message: existingRating ? 'Rating updated' : 'Rating submitted' });
 }));
 
-router.get('/stores/:storeId/my-rating', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/stores/:storeId/my-rating', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const { storeId } = req.params;
 
   const rating = await prisma.rating.findUnique({
@@ -49,7 +49,7 @@ router.get('/stores/:storeId/my-rating', requireRole('NORMAL_USER'), asyncHandle
   res.json({ rating });
 }));
 
-router.delete('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res) => {
+router.delete('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const { storeId } = req.params;
 
   await prisma.rating.delete({
@@ -59,7 +59,7 @@ router.delete('/stores/:storeId', requireRole('NORMAL_USER'), asyncHandler(async
   res.json({ message: 'Rating deleted' });
 }));
 
-router.get('/store/:storeId', requireRole('STORE_OWNER', 'SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/store/:storeId', requireRole('STORE_OWNER', 'SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const { storeId } = req.params;
 
   const store = await prisma.store.findUnique({ where: { id: storeId } });

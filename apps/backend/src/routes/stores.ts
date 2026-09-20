@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AuthRequest, requireRole } from '../middleware/auth.js';
@@ -29,7 +29,7 @@ const querySchema = z.object({
   address: z.string().optional()
 });
 
-router.get('/', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest, res: Response) => {
   const query = querySchema.parse(req.query);
   const { page, limit, sortBy, sortOrder, name, email, address } = query;
 
@@ -76,7 +76,7 @@ router.get('/', asyncHandler(async (req: AuthRequest, res) => {
   });
 }));
 
-router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const data = createStoreSchema.parse(req.body);
 
   const owner = await prisma.user.findUnique({ where: { id: data.ownerId } });
@@ -97,7 +97,7 @@ router.post('/', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthReque
   res.status(201).json({ store });
 }));
 
-router.get('/:id', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/:id', asyncHandler(async (req: AuthRequest, res: Response) => {
   const store = await prisma.store.findUnique({
     where: { id: req.params.id },
     include: {
@@ -127,7 +127,7 @@ router.get('/:id', asyncHandler(async (req: AuthRequest, res) => {
   });
 }));
 
-router.put('/:id', requireRole('SYSTEM_ADMIN', 'STORE_OWNER'), asyncHandler(async (req: AuthRequest, res) => {
+router.put('/:id', requireRole('SYSTEM_ADMIN', 'STORE_OWNER'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const store = await prisma.store.findUnique({ where: { id: req.params.id } });
   if (!store) throw new AppError(404, 'Store not found');
 
@@ -145,7 +145,7 @@ router.put('/:id', requireRole('SYSTEM_ADMIN', 'STORE_OWNER'), asyncHandler(asyn
   res.json({ store: updated });
 }));
 
-router.delete('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.delete('/:id', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   await prisma.store.delete({ where: { id: req.params.id } });
   res.json({ message: 'Store deleted' });
 }));

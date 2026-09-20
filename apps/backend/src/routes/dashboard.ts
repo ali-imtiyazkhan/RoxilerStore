@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import { prisma } from '../lib/prisma.js';
 import { AuthRequest, requireRole } from '../middleware/auth.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 
 const router = Router();
 
-router.get('/admin', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/admin', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const [totalUsers, totalStores, totalRatings] = await Promise.all([
     prisma.user.count(),
     prisma.store.count(),
@@ -30,7 +30,7 @@ router.get('/admin', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthR
   });
 }));
 
-router.get('/store-owner', requireRole('STORE_OWNER'), asyncHandler(async (req: AuthRequest, res) => {
+router.get('/store-owner', requireRole('STORE_OWNER'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const store = await prisma.store.findUnique({
     where: { ownerId: req.user!.id },
     include: {

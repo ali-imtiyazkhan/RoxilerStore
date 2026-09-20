@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
@@ -24,7 +24,7 @@ const loginSchema = z.object({
   password: z.string().min(1)
 });
 
-router.post('/signup', asyncHandler(async (req, res) => {
+router.post('/signup', asyncHandler(async (req: AuthRequest, res: Response) => {
   const data = signupSchema.parse(req.body);
 
   const existingUser = await prisma.user.findUnique({ where: { email: data.email } });
@@ -49,7 +49,7 @@ router.post('/signup', asyncHandler(async (req, res) => {
   res.status(201).json({ user, token });
 }));
 
-router.post('/login', asyncHandler(async (req, res) => {
+router.post('/login', asyncHandler(async (req: AuthRequest, res: Response) => {
   const data = loginSchema.parse(req.body);
 
   const user = await prisma.user.findUnique({ where: { email: data.email } });
@@ -69,7 +69,7 @@ router.post('/login', asyncHandler(async (req, res) => {
   });
 }));
 
-router.get('/me', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/me', asyncHandler(async (req: AuthRequest, res: Response) => {
   const user = await prisma.user.findUnique({
     where: { id: req.user!.id },
     select: { id: true, name: true, email: true, address: true, role: true, createdAt: true }
@@ -77,7 +77,7 @@ router.get('/me', asyncHandler(async (req: AuthRequest, res) => {
   res.json({ user });
 }));
 
-router.put('/password', asyncHandler(async (req: AuthRequest, res) => {
+router.put('/password', asyncHandler(async (req: AuthRequest, res: Response) => {
   const schema = z.object({
     currentPassword: z.string().min(1),
     newPassword: z.string()
