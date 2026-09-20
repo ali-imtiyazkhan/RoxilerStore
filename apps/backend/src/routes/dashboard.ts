@@ -3,7 +3,7 @@ import { prisma } from '../lib/prisma.js';
 import { AuthRequest, requireRole } from '../middleware/auth.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/admin', requireRole('SYSTEM_ADMIN'), asyncHandler(async (req: AuthRequest, res: Response) => {
   const [totalUsers, totalStores, totalRatings] = await Promise.all([

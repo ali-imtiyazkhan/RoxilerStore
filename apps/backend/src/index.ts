@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express, Router } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -14,7 +14,7 @@ import dashboardRoutes from './routes/dashboard.js';
 
 dotenv.config();
 
-const app = express();
+const app: Express = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(helmet());

@@ -4,7 +4,7 @@ import { prisma } from '../lib/prisma.js';
 import { AuthRequest, requireRole } from '../middleware/auth.js';
 import { asyncHandler, AppError } from '../middleware/errorHandler.js';
 
-const router = Router();
+const router: Router = Router();
 
 const ratingSchema = z.object({
   value: z.number().int().min(1).max(5)

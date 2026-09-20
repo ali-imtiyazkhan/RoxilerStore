@@ -5,7 +5,7 @@ import { prisma } from '../lib/prisma.js';
 import { generateToken, AuthRequest } from '../middleware/auth.js';
 import { asyncHandler, AppError } from '../middleware/errorHandler.js';
 
-const router = Router();
+const router: Router = Router();
 
 const signupSchema = z.object({
   name: z.string().min(20).max(60),
