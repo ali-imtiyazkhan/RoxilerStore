@@ -15,7 +15,7 @@
     "db:push": "turbo run db:push",
     "db:migrate": "turbo run db:migrate",
     "db:studio": "turbo run db:studio",
-    "render:backend": "bunx prisma@5.22.0 generate --schema=apps/backend/prisma/schema.prisma && bun run build && bunx prisma@5.22.0 migrate deploy --schema=apps/backend/prisma/schema.prisma"
+    "render:backend": "bunx prisma@5.22.0 generate --schema=apps/backend/prisma/schema.prisma && bun run build && bunx prisma@5.22.0 db push --schema=apps/backend/prisma/schema.prisma --skip-generate"
   },
   "devDependencies": {
     "turbo": "^2.0.0",
