@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="page-bg min-h-screen">
       {children}
     </div>
   );

@@ -117,8 +117,8 @@ export default function AdminStoresPage() {
     <DashboardLayout requiredRoles={['SYSTEM_ADMIN']}>
       <div className="mb-6 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Store Management</h1>
-          <p className="text-gray-600 mt-1">Manage all registered stores</p>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Store Management</h1>
+          <p className="text-slate-600 mt-1">Manage all registered stores</p>
         </div>
         <button onClick={() => { reset(); setShowModal(true); }} className="btn-primary">Add Store</button>
       </div>
@@ -225,8 +225,8 @@ export default function AdminStoresPage() {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-slate-200">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Add New Store</h2>

@@ -27,7 +27,7 @@ export function StarRating({
       {[...Array(fullStars)].map((_, i) => (
         <svg
           key={i}
-          className={cn('text-yellow-400', interactive && 'cursor-pointer')}
+          className={cn('text-amber-400 drop-shadow-sm', interactive && 'cursor-pointer hover:scale-110 transition-transform')}
           width={size}
           height={size}
           fill="currentColor"
@@ -39,7 +39,7 @@ export function StarRating({
       ))}
       {hasHalfStar && (
         <svg
-          className={cn('text-yellow-400', interactive && 'cursor-pointer')}
+          className={cn('text-amber-400 drop-shadow-sm', interactive && 'cursor-pointer hover:scale-110 transition-transform')}
           width={size}
           height={size}
           fill="currentColor"
@@ -52,7 +52,7 @@ export function StarRating({
       {[...Array(emptyStars)].map((_, i) => (
         <svg
           key={i}
-          className={cn('text-gray-300', interactive && 'cursor-pointer')}
+          className={cn('text-slate-200', interactive && 'cursor-pointer hover:scale-110 transition-transform')}
           width={size}
           height={size}
           fill="currentColor"

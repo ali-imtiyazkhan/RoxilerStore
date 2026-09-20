@@ -89,8 +89,8 @@ export default function AdminUsersPage() {
   return (
     <DashboardLayout requiredRoles={['SYSTEM_ADMIN']}>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
-        <p className="text-gray-600 mt-1">Manage all platform users</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">User Management</h1>
+        <p className="text-slate-600 mt-1">Manage all platform users</p>
       </div>
 
       <div className="card mb-6">

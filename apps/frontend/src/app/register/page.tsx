@@ -34,21 +34,28 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <Link href="/" className="text-3xl font-bold text-primary-600">Roxiler</Link>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create account</h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+    <div className="page-bg min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-flex items-center gap-2">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 text-white shadow-glow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-slate-900">Roxiler</span>
+          </Link>
+          <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900">Create your account</h2>
+          <p className="mt-2 text-sm text-slate-600">
             Already have an account?{' '}
-            <Link href="/login" className="font-medium text-primary-600 hover:text-primary-500">
+            <Link href="/login" className="font-semibold text-primary-600 hover:text-primary-500">
               Sign in
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="card space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm">
               {error}
             </div>
           )}
@@ -60,9 +67,9 @@ export default function RegisterPage() {
                 type="text"
                 autoComplete="name"
                 {...register('name')}
-                className={cn('input', errors.name && 'border-red-500 focus:ring-red-500 focus:border-red-500')}
+                className={cn('input', errors.name && 'border-rose-500 focus:ring-rose-500 focus:border-rose-500')}
               />
-              {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+              {errors.name && <p className="mt-1 text-sm text-rose-600">{errors.name.message}</p>}
             </div>
             <div>
               <label htmlFor="email" className="label">Email</label>
@@ -71,9 +78,9 @@ export default function RegisterPage() {
                 type="email"
                 autoComplete="email"
                 {...register('email')}
-                className={cn('input', errors.email && 'border-red-500 focus:ring-red-500 focus:border-red-500')}
+                className={cn('input', errors.email && 'border-rose-500 focus:ring-rose-500 focus:border-rose-500')}
               />
-              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+              {errors.email && <p className="mt-1 text-sm text-rose-600">{errors.email.message}</p>}
             </div>
             <div>
               <label htmlFor="address" className="label">Address (max 400 chars)</label>
@@ -81,9 +88,9 @@ export default function RegisterPage() {
                 id="address"
                 rows={3}
                 {...register('address')}
-                className={cn('input', errors.address && 'border-red-500 focus:ring-red-500 focus:border-red-500')}
+                className={cn('input', errors.address && 'border-rose-500 focus:ring-rose-500 focus:border-rose-500')}
               />
-              {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>}
+              {errors.address && <p className="mt-1 text-sm text-rose-600">{errors.address.message}</p>}
             </div>
             <div>
               <label htmlFor="password" className="label">Password</label>
@@ -92,10 +99,10 @@ export default function RegisterPage() {
                 type="password"
                 autoComplete="new-password"
                 {...register('password')}
-                className={cn('input', errors.password && 'border-red-500 focus:ring-red-500 focus:border-red-500')}
+                className={cn('input', errors.password && 'border-rose-500 focus:ring-rose-500 focus:border-rose-500')}
               />
-              {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
-              <p className="mt-1 text-xs text-gray-500">
+              {errors.password && <p className="mt-1 text-sm text-rose-600">{errors.password.message}</p>}
+              <p className="mt-1 text-xs text-slate-500">
                 8-16 chars, 1 uppercase, 1 special character
               </p>
             </div>
@@ -106,9 +113,9 @@ export default function RegisterPage() {
                 type="password"
                 autoComplete="new-password"
                 {...register('confirmPassword')}
-                className={cn('input', errors.confirmPassword && 'border-red-500 focus:ring-red-500 focus:border-red-500')}
+                className={cn('input', errors.confirmPassword && 'border-rose-500 focus:ring-rose-500 focus:border-rose-500')}
               />
-              {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword && <p className="mt-1 text-sm text-rose-600">{errors.confirmPassword.message}</p>}
             </div>
           </div>
           <button type="submit" disabled={isLoading} className="btn-primary w-full py-3">

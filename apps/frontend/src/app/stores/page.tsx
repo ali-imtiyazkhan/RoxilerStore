@@ -117,8 +117,8 @@ export default function StoresPage() {
   return (
     <DashboardLayout requiredRoles={['NORMAL_USER']}>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">All Stores</h1>
-        <p className="text-gray-600 mt-1">Browse and rate stores</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">All Stores</h1>
+        <p className="text-slate-600 mt-1">Browse and rate stores</p>
       </div>
 
       <div className="card mb-6">
@@ -149,26 +149,26 @@ export default function StoresPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stores.map((store: Store) => (
-          <div key={store.id} className="card">
+          <div key={store.id} className="card flex flex-col hover:shadow-glow transition-shadow">
             <div className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">{store.name}</h3>
-              <p className="text-gray-500 text-sm mt-1">{store.address}</p>
+              <h3 className="text-lg font-semibold text-slate-900">{store.name}</h3>
+              <p className="text-slate-500 text-sm mt-1">{store.address}</p>
             </div>
             <div className="flex items-center gap-2 mb-4">
               <StarRating rating={store.averageRating} size={20} />
-              <span className="font-medium">{store.averageRating.toFixed(1)}</span>
-              <span className="text-gray-500 text-sm">({store.totalRatings} reviews)</span>
+              <span className="font-semibold text-slate-900">{store.averageRating.toFixed(1)}</span>
+              <span className="text-slate-500 text-sm">({store.totalRatings} reviews)</span>
             </div>
-            <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-              <p className="text-sm font-medium text-gray-700">Your Rating</p>
+            <div className="mb-4 p-3 bg-slate-50 rounded-xl border border-slate-100">
+              <p className="text-sm font-medium text-slate-700">Your Rating</p>
               <div className="flex items-center gap-2 mt-2">
                 {store.userRating ? (
                   <>
                     <StarRating rating={store.userRating} size={20} />
-                    <span className="text-sm text-gray-600">You rated: {store.userRating}/5</span>
+                    <span className="text-sm text-slate-600">You rated: {store.userRating}/5</span>
                     <button
                       onClick={() => handleDeleteRating(store.id)}
-                      className="ml-auto text-red-600 hover:text-red-800 text-sm font-medium"
+                      className="ml-auto text-rose-600 hover:text-rose-800 text-sm font-medium"
                     >
                       Remove
                     </button>
@@ -183,12 +183,12 @@ export default function StoresPage() {
                 )}
               </div>
             </div>
-            <p className="text-xs text-gray-400">Added on {formatDate(store.createdAt)}</p>
+            <p className="text-xs text-slate-400 mt-auto">Added on {formatDate(store.createdAt)}</p>
           </div>
         ))}
         {stores.length === 0 && (
           <div className="col-span-full text-center py-12">
-            <p className="text-gray-500">No stores found matching your criteria</p>
+            <p className="text-slate-500">No stores found matching your criteria</p>
           </div>
         )}
       </div>
@@ -202,8 +202,8 @@ export default function StoresPage() {
       )}
 
       {ratingModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full border border-slate-200">
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-4">Rate {ratingModal.store.name}</h2>
               <form onSubmit={handleSubmit(handleRatingSubmit)} className="space-y-4">

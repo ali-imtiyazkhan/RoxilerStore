@@ -63,14 +63,14 @@ export default function StoreOwnerDashboardPage() {
   return (
     <DashboardLayout requiredRoles={['STORE_OWNER']}>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Store Owner Dashboard</h1>
-        <p className="text-gray-600 mt-1">Manage and monitor your store's ratings</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Store Owner Dashboard</h1>
+        <p className="text-slate-600 mt-1">Manage and monitor your store's ratings</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="card">
-          <p className="text-sm font-medium text-gray-600">Store Name</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{store.name}</p>
+          <p className="text-sm font-medium text-slate-500">Store Name</p>
+          <p className="text-2xl font-bold text-slate-900 mt-1">{store.name}</p>
         </div>
         <div className="card">
           <div className="flex items-center gap-2">
