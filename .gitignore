@@ -41,9 +41,6 @@ coverage/
 # Turbo
 .turbo/
 
-# Prisma
-prisma/migrations/
-
 # Misc
 *.pem
 .cache/
